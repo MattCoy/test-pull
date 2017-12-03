@@ -1,0 +1,10 @@
+Ajouter classes Domain/User et DAO/UserDAO
+
+Créer une page qui va lister tout les articles(titre, auteur, date de publication)
+
+Le nom de l'auteur doit être cliquable et renvoyé sur une page de présentation de l'auteur : 
+nom, email, tél et liste des articles qu'il a écrit
+
+->injection de dépendance $app['dao.user'] dans $app['dao.article']
+
+Le titre de l'article doit être cliquable et renvoyer sur la page détail de l'article avec le contenu et toujours l'auteur

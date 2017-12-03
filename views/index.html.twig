@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <title>Silex - Home</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Silex</h1>
+        </header>
+        <div class="col-md-8">
+            <a href="{{ path('listWithAuthors')}}">Liste avec auteurs</a>
+            {% for article in articles %}
+            <article>
+                <h2>
+                    <a href="{{ path('article', {id:article.id}) }}">{{ article.title }}</a>
+                </h2>
+                <p>publié le {{ article.date_publi }}</p>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            {% for user in users %}
+            <article>
+                <h2>{{ user.name }}</h2>
+                <p>{{ user.email }}</p>
+                <p>{{ user.phone }}</p>
+            </article>
+            {% endfor %}
+        </div>
+        <footer class="footer">
+        </footer>
+    </div>
+</body>
+</html>
