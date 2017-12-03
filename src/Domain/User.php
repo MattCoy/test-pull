@@ -2,7 +2,9 @@
 
 namespace WF3\Domain;
 
-class User 
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class User implements UserInterface
 {
     /**
      * Article id.
@@ -16,7 +18,7 @@ class User
      *
      * @var string
      */
-    private $name;
+    private $username;
 
     /**
      * Article content.
@@ -32,6 +34,27 @@ class User
      */
     private $phone;
 
+    /**
+     * User password.
+     *
+     * @var string
+     */
+    private $password;
+
+    /**
+     * Salt that was originally used to encode the password.
+     *
+     * @var string
+     */
+    private $salt;
+
+    /**
+     * Role.
+     * Values : ROLE_USER or ROLE_ADMIN.
+     *
+     * @var string
+     */
+    private $role;
 
 
 
@@ -44,14 +67,18 @@ class User
         return $this;
     }
 
-    public function getName() {
-        return $this->name;
+    /**
+     * @inheritDoc
+     */
+    public function getUsername() {
+        return $this->username;
     }
 
-    public function setName($name) {
-        $this->name = $name;
+    public function setUsername($username) {
+        $this->username = $username;
         return $this;
     }
+
 
     public function getEmail() {
         return $this->email;
@@ -71,4 +98,55 @@ class User
         return $this;
     }
 
+
+    /**
+     * @inheritDoc
+     */
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+        return $this;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function setRole($role) {
+        $this->role = $role;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array($this->getRole());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials() {
+        // Nothing to do here
+    }
 }

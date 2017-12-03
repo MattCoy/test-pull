@@ -11,7 +11,12 @@
             <h1>Silex</h1>
         </header>
         <div class="col-md-8">
-            <a href="{{ path('listWithAuthors')}}">Liste avec auteurs</a>
+            <a href="{{ path('listWithAuthors')}}">Liste avec auteurs</a> |
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href="{{ path('logout')}}">Logout</a>
+            {% else %}
+            <a href="{{ path('login')}}">Login</a>
+            {% endif %}
             {% for article in articles %}
             <article>
                 <h2>
@@ -24,7 +29,7 @@
         <div class="col-md-4">
             {% for user in users %}
             <article>
-                <h2>{{ user.name }}</h2>
+                <h2>{{ user.username }}</h2>
                 <p>{{ user.email }}</p>
                 <p>{{ user.phone }}</p>
             </article>

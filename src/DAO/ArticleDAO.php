@@ -43,9 +43,8 @@ class ArticleDAO extends DAO
     }
 
     public function findALLWithUser(){
-        $sql = 'SELECT art.id, art.title, art.date_publi, users.id as userId FROM '. $this->getTableName() . ' as art, users WHERE art.author = users.id ';
-        $result = $this->getDb()->fetchAll($sql);
-        
+        $sql = 'SELECT id, title, content, date_publi, author as userId FROM '. $this->getTableName();
+        $result = $this->getDb()->fetchAll($sql);        
         
         // Convert query result to an array of domain objects
         $objects = array();
@@ -64,5 +63,14 @@ class ArticleDAO extends DAO
             $objects[$row['id']] = $this->buildObject($row);
         }
         return $objects;
-    }   
+    }
+
+    public function buildObject(array $row){
+        $article = parent::buildObject($row);
+        if(array_key_exists('author', $row) AND is_numeric($row['author'])){
+            $article->setAuthor($this->userDAO->find($row['author']));
+        }
+        return $article;
+    }
+    
 }

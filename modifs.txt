@@ -1,10 +1,10 @@
-Ajouter classes Domain/User et DAO/UserDAO
+rajouter champs password, salt et role à la table users, renommer name en username (modifs à faire dans les vues)
 
-Créer une page qui va lister tout les articles(titre, auteur, date de publication)
+installer "symfony/security": "~3.0" et symfony/security-bundle 3.3 (pour le webprofiler)
 
-Le nom de l'auteur doit être cliquable et renvoyé sur une page de présentation de l'auteur : 
-nom, email, tél et liste des articles qu'il a écrit
+rajouter méthodes interface dans Domain\User et DAO\UserDAO
 
-->injection de dépendance $app['dao.user'] dans $app['dao.article']
+rajouter logout dans config app.php 'logout' => array('logout_path' => '/logout', 'invalidate_session' => true)
 
-Le titre de l'article doit être cliquable et renvoyer sur la page détail de l'article avec le contenu et toujours l'auteur
+ajouter une bouton logout dans les vues si on est connecté ou login si on ne l'est pas 
+path('logout') est générée automatiquement à partir du chemin logout_path où les / sont remplacés par des _ (sauf le premier)
